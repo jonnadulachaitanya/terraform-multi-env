@@ -1,5 +1,16 @@
 variable "instances" {
-    type = map 
+
+}
+
+variable "tags" {
+
+}
+
+variable "common_tags" {
+    default = {
+        project = "expense"
+        terraform = "true"
+    }
 }
 
 variable "zone_id" {
@@ -10,19 +21,3 @@ variable "domain_name" {
     default = "chaitanyaproject.online"
 }
 
-variable "common_tags" {
-    default = {
-        project = "expense" 
-        terraform = "true"
-
-    }
-}
-
-variable "tags" {
-    type = map
-
-}
-
-variable "environment" {
-
-}

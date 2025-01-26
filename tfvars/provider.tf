@@ -5,11 +5,13 @@ terraform {
             version = "5.66.0"
         }
     }
-    backend "s3" {
-        
+
+    backend "aws" {
+
     }
 }
 
 provider "aws" {
     region = "us-east-1"
 }
+
