@@ -6,7 +6,7 @@ terraform {
         }
     }
 
-    backend "aws" {
+    backend "s3" {
 
     }
 }

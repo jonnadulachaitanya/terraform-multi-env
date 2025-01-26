@@ -5,6 +5,14 @@ resource "aws_instance" "multi-env" {
     instance_type = each.value
     ami = "ami-09c813fb71547fc4f"
     vpc_security_group_ids = [aws_security_group.multienv-sg.id]
+
+    tags = merge(
+       var.common_tags,
+       var.tags,
+       {
+        Name = each.key
+       }
+    )
 }
 
 resource "aws_security_group" "multienv-sg" {
@@ -25,12 +33,12 @@ resource "aws_security_group" "multienv-sg" {
         ipv6_cidr_blocks = ["::/0"]
     }
 
-    tags = merge {
+    tags = merge(
        var.common_tags,
        var.tags,
        {
-        Name = each.key
+        Name = "allow-ssh.${var.environment}"
        }
-    }
+    )
 }
 
