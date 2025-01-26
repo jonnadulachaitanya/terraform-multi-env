@@ -1,34 +1,33 @@
-resource "aws_instance" "terraform" {
+resource "aws_instance" "workspace" {
+    instance_type = lookup(var.instance, terraform.workspace)
     ami = "ami-09c813fb71547fc4f"
-    instance_type = lookup(var.instance_type, terraform.workspace)
-    vpc_security_group_ids = [aws_security_group.terraform.id]
+    vpc_security_group_ids = [aws_security_group.allow-ssh.id]
 
     tags = {
-        Name = "terraform-${terraform.workspace}"
+        Name = "workspaces-${terraform.workspace}"
     }
-
 }
 
-resource "aws_security_group" "terraform" {
-    name = "allow-ssh" 
-
+resource "aws_security_group" "allow-ssh" {
     egress {
         to_port = 0
         from_port = 0
         protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
         ipv6_cidr_blocks = ["::/0"]
+
     }
 
-    egress {
+    ingress {
         to_port = 22
-        from_port =22
+        from_port = 22
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
         ipv6_cidr_blocks = ["::/0"]
+        
     }
 
     tags = {
-        default = "allow-ssh"
+        Name = "allow-ssh"
     }
 }

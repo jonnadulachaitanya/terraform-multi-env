@@ -1,7 +1,7 @@
-variable "instance_type" {
+variable "instance" {
     default = {
-        dev = "t3.micro"
-        prod = "t3.medium"
+        prod = "t3.micro"
+        dev = "t3.medium"
         qa = "t3.small"
     }
 }

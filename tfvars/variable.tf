@@ -21,3 +21,7 @@ variable "domain_name" {
     default = "chaitanyaproject.online"
 }
 
+variable "environment" {
+    
+}
+
